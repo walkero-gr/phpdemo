@@ -1,0 +1,8 @@
+pipeline:
+  agent:
+    node:
+      label: "php8"
+  stages:
+    - stage: "Docker build project"
+      steps:
+        - sh "docker build ./jenkins/Dockerfile"
