@@ -5,4 +5,4 @@ pipeline:
   stages:
     - stage: "Docker build project"
       steps:
-        - sh "docker build ./jenkins/Dockerfile"
+        - sh "docker build ."
