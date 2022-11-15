@@ -29,16 +29,14 @@
 node {
     def app
 
-	environment {
-		BASEVER = 1.0.0
-	}
-
     stage('Clone repository') {
         checkout scm
     }
 
     stage('Build image') {
-        app = docker.build("walkero/phpdemo:${env.BASEVER}.${env.BUILD_ID}")
+		withEnv(['BASEVER="1.0.0"']) {
+        	app = docker.build("walkero/phpdemo:${env.BASEVER}.${env.BUILD_ID}")
+		}
     }
 
     stage('Code quality checks') {
