@@ -2,7 +2,17 @@ pipeline:
   agent:
     node:
       label: "php8"
+  environment:
+    BASEVER: "1.0.0"
   stages:
     - stage: "Docker build project"
       steps:
-        - sh "docker build ."
+        - sh "docker build -t walkero/phpdemo:'BASEVER'.'BUILD_ID' ."
+    - stage: "Code quality checks"
+      parallel:
+        - stage: "phpmd"
+          steps:
+            - sh "docker run -it --rm walkero/phpdemo:'BASEVER'.'BUILD_ID' phpmd src,tests html --reportfile ./phpmd-result.html"
+        - stage: "phpcs"
+          steps:
+            - sh "docker run -it --rm walkero/phpdemo:'BASEVER'.'BUILD_ID' phpcs --standard=./phpcs.xml --report=junit --report-file=./phpcs-result.xml"
