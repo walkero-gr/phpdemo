@@ -1,7 +1,7 @@
 pipeline {
-  agent {
-    dockerfile true
-  }
+//   agent {
+//     dockerfile true
+//   }
 //   tools {
 //     'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
 //   }
@@ -9,11 +9,15 @@ pipeline {
 //     DOCKER_CERT_PATH = credentials('id-for-a-docker-cred')
 //   }
   stages {
-    stage('foo') {
-      steps {
-        sh "docker version"
-      }
+	stage('Build image') {
+        app = docker.build("walkero/phpdemo")
     }
+
+    // stage('foo') {
+    //   steps {
+    //     sh "docker version"
+    //   }
+    // }
   }
 }
 
