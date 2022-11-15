@@ -35,7 +35,8 @@ node {
 
     stage('Build image') {
 		withEnv(['BASEVER="1.0.0"']) {
-        	app = docker.build("walkero/phpdemo:${env.BASEVER}.${env.BUILD_ID}")
+			sh 'echo walkero/phpdemo:$BASEVER.$BUILD_ID'
+        	app = docker.build("walkero/phpdemo:$BASEVER.$BUILD_ID")
 		}
     }
 
