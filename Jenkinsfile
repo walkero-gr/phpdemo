@@ -1,4 +1,7 @@
 pipeline {
+  agent {
+    label 'php8'
+  }
 //   agent {
 //     dockerfile true
 //   }
