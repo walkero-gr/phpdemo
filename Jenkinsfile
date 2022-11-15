@@ -42,14 +42,14 @@ node {
 
     stage('Code quality checks') {
     	parallel phpmd: {
-			node('phpmd') {
+			node {
 				app.inside {
 					sh 'phpmd src,tests html --reportfile ./phpmd-result.html'
 				}
 			}
 		},
 		phpcs: {
-			node('phpcs') {
+			node {
 				app.inside {
 					sh 'phpcs --standard=./phpcs.xml --report=junit --report-file=./phpcs-result.xml'
 				}
